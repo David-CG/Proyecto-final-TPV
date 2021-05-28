@@ -15,15 +15,16 @@ public class TPV {
         frame.setLayout(new GridLayout());
         frame.add(panel);
         frame.pack();
+        frame.setSize(800, 500);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     void panelPrincipal() {
         panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 5, 10, 10));
-        boton = new JButton("Botón");
-        panel.add(boton);
+        panel.setLayout(new GridLayout(0, 5, 5, 5));
+        boton = new JButton("");
+
     }
 
     public TPV() {
