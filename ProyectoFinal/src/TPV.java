@@ -1,14 +1,12 @@
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.GridLayout;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 public class TPV {
 
     JFrame frame;
     JPanel panel;
     JButton boton;
+    ImageIcon logo;
 
     void ventana() {
         frame = new JFrame("Xiaomi Elche");
@@ -18,6 +16,9 @@ public class TPV {
         frame.setSize(800, 500);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        logo = new ImageIcon("milogo.png");
+        frame.setIconImage(logo.getImage());
     }
 
     void panelPrincipal() {
