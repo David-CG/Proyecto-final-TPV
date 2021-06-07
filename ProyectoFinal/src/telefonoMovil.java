@@ -1,18 +1,21 @@
+import javax.swing.*;
+
 public class telefonoMovil {
     private final String marca;
     private final String modelo;
-    private final String color;
     private int almacenamiento;
     private final int ram;
     private int precioEuros;
+    private ImageIcon icono;
 
-    public telefonoMovil(String marca, String modelo, String color, int almacenamiento, int ram, String imei, int precioEuros) {
+
+    public telefonoMovil(String marca, String modelo, int almacenamiento, int ram, int precioEuros, ImageIcon icono) {
         this.marca = marca;
         this.modelo = modelo;
-        this.color = color;
         this.almacenamiento = almacenamiento;
         this.ram = ram;
         this.precioEuros = precioEuros;
+        this.icono = icono;
     }
 
     public String getMarca() {
@@ -21,10 +24,6 @@ public class telefonoMovil {
 
     public String getModelo() {
         return modelo;
-    }
-
-    public String getColor() {
-        return color;
     }
 
     public int getAlmacenamiento() {
@@ -47,7 +46,19 @@ public class telefonoMovil {
         this.precioEuros = precioEuros;
     }
 
+    public ImageIcon getIcono() {
+        return icono;
+    }
+
+    public void setIcono(ImageIcon icono) {
+        this.icono = icono;
+    }
+
     public String infoMovil(){
         return marca+" "+modelo+" con "+almacenamiento+"GB de almacenamiento y "+ram+"GB de memoria RAM y cuesta "+precioEuros+"€";
+    }
+
+    public String nombreMovil(){
+        return marca+" "+modelo;
     }
 }
