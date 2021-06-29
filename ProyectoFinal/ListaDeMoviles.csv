@@ -1,9 +1,9 @@
-"Xiaomi", "Mi 10", "Verde", 128, 8, 799
-"Xiaomi", "Mi 11", "Azul", 128, 8, 750
-"Xiaomi", "Mi 11 Ultra", "Negro", 256, 12, 1200
-"Redmi", "9", "Naranja", 128, 4, 200
-"Redmi", "Note 9", "Verde", 128, 4, 149
-"Redmi", "Note 10", "Blanco", 128, 4, 200
-"POCOPHONE", "F2 Pro", "Morado", 256, 8, 530
-"POCOPHONE", "F3", "Azul", 256, 8, 370
-"POCOPHONE", "X3 Pro", "Bronce", 256, 8, 300
+Xiaomi,Mi 10,799
+Xiaomi,Mi 11,750
+Xiaomi,Mi 11 Ultra,1200
+Redmi,9,200
+Redmi,Note 9,149
+Redmi,Note 10,200
+POCOPHONE,F2 Pro,530
+POCOPHONE,F3,370
+POCOPHONE,X3 Pro,300
