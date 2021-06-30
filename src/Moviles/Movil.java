@@ -1,6 +1,7 @@
 package Moviles;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.Objects;
 
@@ -36,7 +37,17 @@ public class Movil {
         File pathIcono = new File("Moviles" + File.separator + modelo + ".jpeg");
         ImageIcon icono = new ImageIcon(pathIcono.getPath());
         
+        boolean encuentraIcono = icono.getIconHeight() > -1;
+        if (encuentraIcono) {
+            icono = tamanyoIcono(icono);
+        }
         return icono;
+    }
+    
+    private ImageIcon tamanyoIcono(ImageIcon icono) {
+        Image imagen = icono.getImage();
+        Image tamanyoImagen = imagen.getScaledInstance(200, 200, Image.SCALE_REPLICATE);
+        return new ImageIcon(tamanyoImagen);
     }
     
     @Override

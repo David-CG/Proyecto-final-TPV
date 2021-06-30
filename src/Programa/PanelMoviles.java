@@ -13,7 +13,7 @@ public class PanelMoviles implements Serializable {
     
     public PanelMoviles(PanelCompra panelCompra) {
         this.panelCompra = panelCompra;
-        this.panelMovil = new JPanel(new GridLayout(4, 4));
+        this.panelMovil = new JPanel(new GridLayout(3, 3));
     }
     
     public JPanel getPanelMovil() {
@@ -21,14 +21,10 @@ public class PanelMoviles implements Serializable {
     }
     
     public void anyadeMovil(Movil movil) {
-        BotonMovil boton = new BotonMovil(movil);
+        BotonMovil boton = new BotonMovil(movil, panelCompra);
+        boton.getBoton().setPreferredSize(new Dimension(200, 200));
         boton.getBoton().addActionListener(e -> panelCompra.pulsar(movil));
-    }
-    
-    public JButton devuelveBoton(Movil movil) {
-        BotonMovil botonMovil = new BotonMovil(movil);
-        botonMovil.getBoton().addActionListener(e -> panelCompra.pulsar(movil));
-        return botonMovil.getBoton();
+        panelMovil.add(boton.getBoton());
     }
     
     public void actualizaBotones(Set<Movil> listaDeJuegos) {

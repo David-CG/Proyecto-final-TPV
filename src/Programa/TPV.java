@@ -12,7 +12,7 @@ import java.util.logging.Level;
 
 public class TPV {
         public static void main (String[]args){
-            File fichero = new File("ListaDeMoviles.csv"); // TODO No encuentra el fichero
+            File fichero = new File("ListaDeMoviles.csv");
             Tiquet tiquet = new Tiquet();
             PanelCompra panelCompra = new PanelCompra(tiquet);
             PanelMoviles panelMoviles = new PanelMoviles(panelCompra);
@@ -22,8 +22,11 @@ public class TPV {
                 String linea;
                 while ((linea = reader.readLine()) != null) {
                     List<String> campos = Arrays.asList(linea.split(","));
-                    Marcas marcas = Marcas.valueOf(campos.get(0));
-                    Movil movil = new Movil(marcas, campos.get(1), Integer.parseInt(campos.get(2)));
+                    
+                    Marcas marca = Marcas.valueOf(campos.get(0));
+                    String modelo = campos.get(1);
+                    int precio = Integer.parseInt(campos.get(2));
+                    Movil movil = new Movil(marca, modelo, precio);
                     panelMoviles.anyadeMovil(movil);
                     panelMarcas.anyadeMovilAMarca(movil);
                 }
@@ -40,14 +43,14 @@ public class TPV {
     
             JFrame frame = new JFrame("Xiaomi Elche");
             frame.setLayout(new BorderLayout());
-            frame.add(panelMarcas.getPanelMarcas(), BorderLayout.EAST);
+            frame.add(panelMarcas.getPanelMarcas(), BorderLayout.WEST);
             frame.add(panelMoviles.getPanelMovil(), BorderLayout.CENTER);
-            frame.add(panelCompra.getPanelCompras(), BorderLayout.WEST);
-            frame.pack();
-            frame.setSize(1280, 720);
-            frame.setLocation(100, 50);
+            frame.add(panelCompra.getPanelCompras(), BorderLayout.EAST);
             frame.setVisible(true);
+            frame.pack();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.setSize(1280, 720);
+            frame.setLocation(100, 100);
     
             ImageIcon logo = new ImageIcon("milogo.png");
             frame.setIconImage(logo.getImage());

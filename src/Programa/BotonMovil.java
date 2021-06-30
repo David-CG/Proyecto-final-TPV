@@ -5,14 +5,19 @@ import Moviles.Movil;
 import javax.swing.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public class BotonMovil implements Serializable {
     private final JButton boton;
     private final Movil movil;
     
-    public BotonMovil(Movil movil) {
+    public BotonMovil(Movil movil, PanelCompra panelCompra) {
         this.movil = movil;
         this.boton = new JButton(movil.getIcono());
+        this.boton.addActionListener(e -> {
+            panelCompra.generadorPanelCompra();
+            Log.log(Level.INFO, movil.getMarca() + " " + movil.getModelo() + " añadido al carrito.");
+        });
     }
     
     public JButton getBoton() {

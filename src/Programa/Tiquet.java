@@ -5,31 +5,22 @@ import Moviles.Movil;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.Level;
+
+// TODO impresión del ticket
 
 public class Tiquet implements Serializable {
     private final Map<Movil, Integer> listaMovilesCarrito;
     private int costeCompra;
-    private final LocalDateTime fechaHoraTiquet;
     
     public Tiquet(){
         this.listaMovilesCarrito = new LinkedHashMap<>();
-        this.fechaHoraTiquet = LocalDateTime.now();
     }
     
     public Map<Movil, Integer> getCarritoMoviles() {
         List<Movil> salida = new ArrayList<>();
         salida.addAll(listaMovilesCarrito.keySet());
         return listaMovilesCarrito;
-    }
-    
-    public String getCosteCompra() {
-        return costeCompra + "€";
-    }
-    
-    public String getFechaHoraTiquet() {
-        String dia = fechaHoraTiquet.getDayOfMonth() + " - " + fechaHoraTiquet.getMonthValue() + " - " + fechaHoraTiquet.getYear();
-        String hora = fechaHoraTiquet.getHour() + ":" + fechaHoraTiquet.getMinute();
-        return "El dia " + dia + " a las " + hora + " se ha creado su recibo.";
     }
     
     public void anyadeATiquet(Movil movil) {
@@ -50,6 +41,7 @@ public class Tiquet implements Serializable {
         costeCompra = costeCompra - movil.getPrecioEuros() * cantidadCarro;
         if (cantidadCarro - 1 == 0) {
             listaMovilesCarrito.remove(movil);
+            Log.log(Level.INFO, movil.getMarca() + " " + movil.getModelo() + " eliminado del carrito.");
         } else {
             listaMovilesCarrito.put(movil, cantidadCarro - 1);
         }
@@ -57,24 +49,9 @@ public class Tiquet implements Serializable {
     
     public String costeTotalCompra() {
         int costeTotal = 0;
-        for (Map.Entry<Movil, Integer> t : listaMovilesCarrito.entrySet()) {
-            costeTotal += t.getKey().getPrecioEuros()*t.getValue();
+        for (Map.Entry<Movil, Integer> entry : listaMovilesCarrito.entrySet()) {
+            costeTotal += entry.getKey().getPrecioEuros()*entry.getValue();
         }
         return costeTotal + "€";
-    }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tiquet tiquet = (Tiquet) o;
-        return costeCompra == tiquet.costeCompra &&
-                Objects.equals(listaMovilesCarrito, tiquet.listaMovilesCarrito) &&
-                Objects.equals(fechaHoraTiquet, tiquet.fechaHoraTiquet);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(listaMovilesCarrito, costeCompra, fechaHoraTiquet);
     }
 }
