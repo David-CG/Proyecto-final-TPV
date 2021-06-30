@@ -1,39 +1,55 @@
 package Programa;
 
+import Moviles.Marcas;
+import Moviles.Movil;
+
 import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
 
 public class TPV {
-    
-    JFrame frame;
-    JPanel panelizq;
-    JPanel panelder;
-    ImageIcon logo;
-    
-    
-    /*
-    void panelIzq() {
-        panelizq.setLayout(new GridLayout());
-        panelizq.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.getHSBColor(0, 100, 256)));
-        tp.add("Mi", xiaomi);
-        tp.add("RedMi", redmi);
-        tp.add("POCO", poco);
-        panelizq.add(tp);
-    }
-    
-    frame = new JFrame("Xiaomi Elche");
-        frame.setLayout(new GridLayout());
-        frame.add(panelizq);
-        frame.add(panelder);
-        frame.pack();
-        frame.setSize(1280, 720);
-        frame.setLocation(100, 50);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    
-        logo = new ImageIcon("milogo.png");
-        frame.setIconImage(logo.getImage());
-    */
-    
         public static void main (String[]args){
+            File fichero = new File("ListaDeMoviles.csv"); // TODO No encuentra el fichero
+            Tiquet tiquet = new Tiquet();
+            PanelCompra panelCompra = new PanelCompra(tiquet);
+            PanelMoviles panelMoviles = new PanelMoviles(panelCompra);
+            PanelMarcas panelMarcas = new PanelMarcas(panelMoviles);
+    
+            try (BufferedReader reader = new BufferedReader(new FileReader(fichero))) {
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    List<String> campos = Arrays.asList(linea.split(","));
+                    Marcas marcas = Marcas.valueOf(campos.get(0));
+                    Movil movil = new Movil(marcas, campos.get(1), Integer.parseInt(campos.get(2)));
+                    panelMoviles.anyadeMovil(movil);
+                    panelMarcas.anyadeMovilAMarca(movil);
+                }
+            } catch (FileNotFoundException notFoundException) {
+                Log.log(Level.SEVERE, "Fichero inexistente.");
+            } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
+                Log.log(Level.WARNING, "Móvil descatalogado.");
+            } catch (IllegalArgumentException argumentException) {
+                Log.log(Level.WARNING, "Argumento inválido");
+            } catch (IOException ioException) {
+                Log.log(Level.WARNING, "Algo no ha ido bien.");
+            }
+    
+    
+            JFrame frame = new JFrame("Xiaomi Elche");
+            frame.setLayout(new BorderLayout());
+            frame.add(panelMarcas.getPanel(), BorderLayout.WEST);
+            frame.add(panelMoviles.getPanelMovil(), BorderLayout.EAST);
+            frame.add(panelCompra.getPanelCompras(), BorderLayout.CENTER);
+            frame.pack();
+            frame.setSize(1280, 720);
+            frame.setLocation(100, 50);
+            frame.setVisible(true);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    
+            ImageIcon logo = new ImageIcon("milogo.png");
+            frame.setIconImage(logo.getImage());
         }
     }

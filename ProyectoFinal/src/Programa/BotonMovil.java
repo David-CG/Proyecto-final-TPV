@@ -10,15 +10,17 @@ public class BotonMovil implements Serializable {
     private final JButton boton;
     private final Movil movil;
     
-    public BotonMovil(JButton boton, Movil movil) {
-        this.boton = new JButton(movil.getIcono());
-        this.boton.setIcon(movil.getIcono());
-        // TODO lo del log
+    public BotonMovil(Movil movil) {
         this.movil = movil;
+        this.boton = new JButton(movil.getIcono());
     }
     
     public JButton getBoton() {
         return boton;
+    }
+    
+    public Movil getMovil() {
+        return movil;
     }
     
     @Override
