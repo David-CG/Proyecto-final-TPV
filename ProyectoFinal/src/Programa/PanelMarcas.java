@@ -23,7 +23,7 @@ public class PanelMarcas implements Serializable {
         generadorBotones();
     }
     
-    public JPanel getPanel() {
+    public JPanel getPanelMarcas() {
         return panel;
     }
     

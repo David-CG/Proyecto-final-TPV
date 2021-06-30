@@ -40,9 +40,9 @@ public class TPV {
     
             JFrame frame = new JFrame("Xiaomi Elche");
             frame.setLayout(new BorderLayout());
-            frame.add(panelMarcas.getPanel(), BorderLayout.WEST);
-            frame.add(panelMoviles.getPanelMovil(), BorderLayout.EAST);
-            frame.add(panelCompra.getPanelCompras(), BorderLayout.CENTER);
+            frame.add(panelMarcas.getPanelMarcas(), BorderLayout.EAST);
+            frame.add(panelMoviles.getPanelMovil(), BorderLayout.CENTER);
+            frame.add(panelCompra.getPanelCompras(), BorderLayout.WEST);
             frame.pack();
             frame.setSize(1280, 720);
             frame.setLocation(100, 50);
