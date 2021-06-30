@@ -3,6 +3,7 @@ package Programa;
 import Moviles.Movil;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.Map;
@@ -16,6 +17,8 @@ public class PanelCompra implements Serializable {
     
     public PanelCompra(Tiquet tiquet) {
         this.panelCompras = new JPanel(new GridLayout(0, 1));
+        panelCompras.setPreferredSize(new Dimension(400, 720));
+        panelCompras.setBorder(BorderFactory.createEmptyBorder(0, 50 ,0 ,0));
         this.panelMoviles = new JPanel(new GridLayout(0, 1));
         this.panelTiquet = new JPanel(new BorderLayout());
         this.tiquet = tiquet;
@@ -48,15 +51,15 @@ public class PanelCompra implements Serializable {
         JPanel panel = new JPanel();
         BoxLayout caja = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
         panel.setLayout(caja);
-        for (Map.Entry<Movil, Integer> movilIntegerEntry : tiquet.getCarritoMoviles().entrySet()) {
+        for (Map.Entry<Movil, Integer> entry : tiquet.getCarritoMoviles().entrySet()) {
             JPanel tempPanel = new JPanel();
             tempPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-            JLabel label =  new JLabel(movilIntegerEntry.getKey().getMarca() + " " + movilIntegerEntry.getKey().getModelo() + " " + movilIntegerEntry.getValue() + " Total: " + movilIntegerEntry.getKey().getPrecioEuros() + "€");
+            JLabel label =  new JLabel(entry.getKey().getMarca() + " " + entry.getKey().getModelo() + " x" + entry.getValue() + " Total: " + entry.getKey().getPrecioEuros() + "€");
             label.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
             tempPanel.add(label);
             JButton boton = new JButton("x");
             boton.addActionListener(e-> {
-                tiquet.quitaDelCarrito(movilIntegerEntry.getKey());
+                tiquet.quitaDelCarrito(entry.getKey());
                 generadorPanelCompra();
             });
             tempPanel.add(boton);

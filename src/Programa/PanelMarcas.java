@@ -16,7 +16,7 @@ public class PanelMarcas implements Serializable {
     
     public PanelMarcas(PanelMoviles panelMoviles) {
         this.panelMoviles = panelMoviles;
-        this.panelMarcas = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.panelMarcas = new JPanel(new GridLayout(0, 1));
         this.botonMarca = new HashSet<>();
         this.listaMarcas = new HashMap<>();
         mapMarcas();
